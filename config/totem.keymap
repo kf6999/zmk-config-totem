@@ -1,5 +1,6 @@
-// Updated keymap for TOTEM – matches Corne layers shown in screenshots
-// Layers: BASE (QWERTY) – NAV (numbers/arrow/media) – SYM (symbols/brackets) – ADJ (unchanged)
+// TOTEM keymap – optimised QWERTY, no home‑row mods
+// Layers: BASE / NAV (numbers+arrows) / SYM (symbols+brackets) / ADJ (system)
+// Thumb‑centric modifiers and combos per community best practices.
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
@@ -11,90 +12,63 @@
 #define SYM  2
 #define ADJ  3
 
-&mt {
-  quick-tap-ms = <100>;
-  global-quick-tap;
-  flavor = "tap-preferred";
-  tapping-term-ms = <170>;
-};
+&mt { quick-tap-ms = <100>; global-quick-tap; flavor = "tap-preferred"; tapping-term-ms = <170>; };
 
 / {
-    combos {
-        compatible = "zmk,combos";
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <0 1>;
-            bindings = <&kp ESC>;
-        };
+  combos {
+    compatible = "zmk,combos";
+    // Esc: tap Q+W together (fast, no extra key) – 38‑key community favourite
+    combo_esc { timeout-ms = <50>; key-positions = <0 1>; bindings = <&kp ESC>; };
+    // Tab: tap A+S together
+    combo_tab { timeout-ms = <50>; key-positions = <10 11>; bindings = <&kp TAB>; };
+    // Bksp: tap O+P together
+    combo_bspc { timeout-ms = <50>; key-positions = <8 9>; bindings = <&kp BSPC>; };
+  };
+
+  keymap { compatible = "zmk,keymap";
+
+    /* ───────── BASE ───────── */
+    base_layer {
+      label = "BASE";
+      bindings = <
+        /* row 0 */ &kp Q &kp W &kp E &kp R &kp T       &kp Y &kp U &kp I &kp O &kp P
+        /* row 1 */ &kp A &kp S &kp D &kp F &kp G       &kp H &kp J &kp K &kp L &kp SQT
+        /* row 2 */ &kp Z &kp X &kp C &kp V &kp B       &kp N &kp M &kp COMMA &kp DOT &kp FSLH &kp BSLH
+                      /* thumbs */             &kp LSHFT &kp SPACE &lt NAV TAB   &lt SYM ENTER &kp BSPC &kp RALT
+      >;
     };
 
-    macros {
-        gif: gif {
-            label = "giphy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_press &kp LSHFT>
-                , <&macro_tap &kp N2>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp G &kp I &kp F>
-                ;
-        };
+    /* ───────── NAV (numbers / arrows / media) ───────── */
+    nav_layer {
+      label = "NAV";
+      bindings = <
+        &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4   &kp N5 &kp N6 &kp N7 &kp N8 &kp N9
+        &kp LCTRL &kp LEFT &kp DOWN &kp UP &kp RIGHT   &kp LBRKT &kp RBRKT &kp MINUS &kp EQUAL &kp RCTRL
+        &trans &tpg &kp PG_UP &kp PG_DN &kp HOME   &kp END &kp C_PREV &kp C_PLAY &kp C_NEXT &trans &trans
+                     &trans &trans &trans &mo ADJ &kp N0 &trans
+      >;
     };
 
-    keymap {
-        compatible = "zmk,keymap";
-
-        // ───────────────────────────── BASE ─────────────────────────────
-        base_layer {
-            label = "BASE";
-            bindings = <
-                // top row (Q‑P)
-                &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-                // home row with home‑row mods (A‑;)
-                &mt LGUI A  &mt LALT S  &mt LCTRL D &mt LSHFT F &kp G           &kp H       &mt RSHFT J &mt RCTRL K &mt RALT L  &mt RGUI SQT
-                // bottom row (Z‑/)
-                &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp BSLH
-                                            // thumbs (LSft  Space  NAV /  SYM  Bksp  RAlt)
-                                            &kp LSHFT  &kp SPACE  &lt NAV TAB       &lt SYM ENTER &kp BSPC   &kp RALT
-            >;
-        };
-
-        // ───────────────────────────── NAV (numbers / arrows / media) ─────────────────────────────
-        nav_layer {
-            label = "NAV";
-            bindings = <
-                // numbers row (Tab 1‑0)
-                &kp TAB    &kp N1     &kp N2     &kp N3     &kp N4            &kp N5     &kp N6     &kp N7     &kp N8     &kp N9
-                // arrows
-                &kp LSHFT  &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT         &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp N0
-                // media cluster & transparent remainder
-                &trans     &kp C_PREV &kp C_STOP &kp C_PLAY &kp C_NEXT        &trans     &trans     &trans     &trans     &trans     &trans
-                                              &trans      &trans      &trans           &mo ADJ     &trans     &trans
-            >;
-        };
-
-        // ───────────────────────────── SYM (punctuation / brackets) ─────────────────────────────
-        sym_layer {
-            label = "SYM";
-            bindings = <
-                // shifted number symbols and braces
-                &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT         &kp CARET  &kp AMPS   &kp ASTERISK &kp LPAR   &kp RPAR
-                &kp LBRC   &kp LCBR   &kp MINUS  &kp EQUAL  &kp PLUS          &kp LCBR   &kp RCBR   &kp SQT      &kp DQT    &kp PIPE
-                &trans     &trans     &kp LBKT   &kp RBKT   &kp BSLH          &kp TILDE  &kp UNDERSCORE &kp PLUS  &kp RA(NUHS) &trans &trans
-                                              &trans      &gif        &mo ADJ          &trans     &trans     &trans
-            >;
-        };
-
-        // ───────────────────────────── ADJ (system) – unchanged ─────────────────────────────
-        adjust_layer {
-            label = "ADJ";
-            bindings = <
-                &sys_reset  &bt BT_CLR &out OUT_TOG &trans      &trans           &trans      &kp F7      &kp F8      &kp F9      &kp F12
-                &bootloader &bt BT_NXT &trans       &trans      &trans           &trans      &kp F4      &kp F5      &kp F6      &kp F11
-                &trans      &trans      &bt BT_PRV  &trans      &trans          &trans      &kp F1      &kp F2      &kp F3      &kp F10     &trans
-                                              &trans      &trans      &trans           &trans      &trans     &trans
-            >;
-        };
+    /* ───────── SYM (punctuation / brackets) ───────── */
+    sym_layer {
+      label = "SYM";
+      bindings = <
+        &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS &kp ASTERISK &kp LPAR &kp RPAR
+        &kp LCBR &kp LBRKT &kp PIPE &kp BSLH &kp UNDERSCORE   &kp RCBR &kp RBRKT &kp COLON &kp SEMI &kp PLUS
+        &trans &trans &kp LT &kp GT &kp QUESTION   &kp TILDE &kp RA(NUHS) &kp QUOT &kp DQT &trans &trans
+                     &trans &gif &mo ADJ &trans &trans &trans
+      >;
     };
+
+    /* ───────── ADJ (system / Bluetooth / F‑keys) ───────── */
+    adjust_layer {
+      label = "ADJ";
+      bindings = <
+        &sys_reset &bt BT_CLR &out OUT_TOG &trans &trans    &trans &kp F7 &kp F8 &kp F9 &kp F12
+        &bootloader &bt BT_NXT &trans &trans &trans        &trans &kp F4 &kp F5 &kp F6 &kp F11
+        &trans &trans &bt BT_PRV &trans &trans             &trans &kp F1 &kp F2 &kp F3 &kp F10 &trans
+                    &trans &trans &trans &trans &trans &trans
+      >;
+    };
+  };
 };
