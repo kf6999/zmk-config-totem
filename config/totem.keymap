@@ -42,7 +42,7 @@
         combo_tvp {
             timeout-ms = <100>;
             key-positions = <11 12 13>;
-            bindings = <&tog TVP1>;
+            bindings = <&tog 4>;
         };
     };
 
@@ -88,7 +88,7 @@
                   &kp Q  &kp W  &kp E           &kp R      &kp T             &kp Y        &kp U          &kp I                 &kp O    &kp P
                   &kp A  &kp S  &kp D           &kp F      &kp G             &kp H        &kp J          &kp K                 &kp L    &kp SEMICOLON
 &kp LEFT_CONTROL  &kp Z  &kp X  &kp C           &kp V      &kp B             &kp N        &kp M          &kp COMMA             &kp DOT  &kp FSLH       &kp SQT
-                                &kp LEFT_SHIFT  &kp SPACE  &lt 1 LEFT_WIN    &lt 2 ENTER  &kp BACKSPACE  &mt RIGHT_ALT ESCAPE
+                                &kp LEFT_SHIFT  &kp SPACE  &lt 2 LEFT_WIN    &lt 2 ENTER  &kp BACKSPACE  &mt RIGHT_ALT ESCAPE
             >;
         };
 
@@ -111,10 +111,10 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-        &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3    &kp NUMBER_4          &kp NUMBER_5             &kp NUMBER_6    &kp N7        &kp N8        &kp N9        &kp N0
-        &kp LSHFT     &kp LEFT      &kp TAB         &kp LEFT_BRACKET      &kp RIGHT_BRACKET        &kp LEFT_ARROW  &kp UP_ARROW  &kp DOWN      &kp RIGHT     &kp MINUS
-&trans  &kp DEL       &kp PG_UP     &kp CAPS        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS    &kp UNDERSCORE  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp KP_MULTIPLY  &trans
-                                    &kp LEFT_SHIFT  &kp SPACE             &trans                   &mo ADJ         &kp DELETE    &trans
+                  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3    &kp NUMBER_4          &kp NUMBER_5             &kp NUMBER_6    &kp N7        &kp N8               &kp N9        &kp N0
+                  &kp LSHFT     &kp LEFT      &kp TAB         &kp LEFT_BRACKET      &kp RIGHT_BRACKET        &kp LEFT_ARROW  &kp DOWN      &kp UP_ARROW         &kp RIGHT     &kp MINUS
+&kp LEFT_CONTROL  &kp DEL       &kp PG_UP     &kp CAPS        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS    &kp UNDERSCORE  &kp NUMBER_1  &kp NUMBER_2         &kp NUMBER_3  &kp KP_MULTIPLY  &trans
+                                              &kp LEFT_SHIFT  &kp SPACE             &trans                   &mo 3           &kp DELETE    &mt LEFT_ALT ESCAPE
             >;
         };
 
@@ -137,10 +137,10 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-        &kp EXCL     &kp AT       &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET     &kp AMPS                &kp RA(ASTERISK)     &kp SQT     &kp DQT
-        &kp RA(A)    &trans       &kp RA(S)  &trans    &trans       &kp C_MUTE    &kp LS(RA(LEFT_BRACE))  &kp RA(RIGHT_BRACE)  &kp RA(N4)  &kp RA(O)
-&trans  &kp RA(F18)  &kp RA(F19)  &trans     &trans    &trans       &kp C_VOL_DN  &kp C_VOL_UP            &kp C_PREV           &kp C_NEXT  &kp BSLH   &trans
-                                  &trans     &gif      &mo ADJ      &trans        &kp C_PP                &trans
+                  &kp EXCL     &kp AT       &kp HASH        &kp DLLR   &kp PRCNT    &kp CARET       &kp AMPS   &kp ASTERISK      &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
+                  &kp RA(A)    &trans       &kp RA(S)       &trans     &trans       &kp MINUS       &kp PLUS   &kp LEFT_BRACKET  &kp RIGHT_BRACKET     &kp NON_US_BACKSLASH
+&kp LEFT_CONTROL  &kp RA(F18)  &kp RA(F19)  &trans          &trans     &trans       &kp UNDERSCORE  &kp EQUAL  &kp K_PREVIOUS    &kp K_PLAY_PAUSE      &kp K_NEXT             &kp GRAVE
+                                            &kp LEFT_SHIFT  &kp SPACE  &mo 3        &kp ENTER       &kp C_PP   &trans
             >;
         };
 
@@ -189,10 +189,10 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-       &kp TAB     &kp I      &kp LC(LALT)  &kp O        &kp LC(F20)    &none  &none  &none  &none  &none
-       &lt TVP2 L  &kp LEFT   &kp LALT      &kp RIGHT    &kp SPACE      &none  &none  &none  &none  &none
-&kp J  &kp LSHFT   &kp LC(C)  &kp BSPC      &kp LC(V)    &kp LC(F19)    &none  &none  &none  &none  &none  &none
-                              &trans        &kp LC(F14)  &kp LC(F13)    &none  &none  &none
+       &kp TAB    &kp I      &kp LC(LALT)  &kp O        &kp LC(F20)    &none  &none  &none  &none  &none
+       &lt 5 L    &kp LEFT   &kp LALT      &kp RIGHT    &kp SPACE      &none  &none  &none  &none  &none
+&kp J  &kp LSHFT  &kp LC(C)  &kp BSPC      &kp LC(V)    &kp LC(F19)    &none  &none  &none  &none  &none  &none
+                             &trans        &kp LC(F14)  &kp LC(F13)    &none  &none  &none
             >;
         };
 
